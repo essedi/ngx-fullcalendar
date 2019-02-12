@@ -105,6 +105,8 @@ export class FullCalendarComponent implements OnInit, OnDestroy, AfterViewChecke
   @Output() onEventRender: EventEmitter<any> = new EventEmitter();
   @Output() onEventDestroy: EventEmitter<any> = new EventEmitter();
   @Output() onEventAfterRender: EventEmitter<any> = new EventEmitter();
+  @Output() onColumnHeaderHtml: EventEmitter<any> = new EventEmitter();
+
   // tslint:enable:no-output-on-prefix
 
   calendar: any;
@@ -256,6 +258,13 @@ export class FullCalendarComponent implements OnInit, OnDestroy, AfterViewChecke
     };
     this.config.eventAfterRender = (event, element, view) => {
       this.onEventAfterRender.emit({
+        'event': event,
+        'element': element,
+        'view': view
+      });
+    };
+    this.config.columnHeaderHtml = (event, element, view) => {
+      this.onColumnHeaderHtml.emit({
         'event': event,
         'element': element,
         'view': view
